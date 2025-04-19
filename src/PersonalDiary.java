@@ -10,20 +10,21 @@ public class PersonalDiary {
         this.password = password;
         entries = new ArrayList<>();
     }
-    public void unLockedDiary(String password) {
+    public void unlockDiary(String password) {
         boolean isValidUser = this.password.equals(password);
         if (isValidUser) isLocked = false;
     }
     public boolean isLocked() {
         return isLocked;
     }
-    public void lockedDiary() {
+    public void lockDiary() {
         isLocked = true;
     }
     public void createEntry(String title, String body) {
+        boolean isValidSecurity = !isLocked;
         MyEntry myEntry = new MyEntry(entries.size(), title, body);
-        this.entries.add(myEntry);
-        this.lockedDiary();
+        if(isValidSecurity)this.entries.add(myEntry);
+        this.lockDiary();
     }
     public int numberOfDiary() {
         return entries.size();
@@ -41,8 +42,9 @@ public class PersonalDiary {
          return isValidSearch? entries.get(identification): null;
     }
     public void updateEntry(int identification, String title1, String body) {
+        boolean isValidOperation = !isLocked && identification >= 0 && identification < entries.size();
         MyEntry updated = new  MyEntry(identification, title1, body);
-        this.entries.set(identification, updated);
-        this.lockedDiary();
+       if(isValidOperation)this.entries.set(identification, updated);
+       this.lockDiary();
     }
 }
