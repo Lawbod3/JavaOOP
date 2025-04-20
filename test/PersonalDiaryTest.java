@@ -28,17 +28,17 @@ public class PersonalDiaryTest {
         PersonalDiary myDiary = new PersonalDiary("username", "password");
         myDiary.unlockDiary("password");
         myDiary.createEntry("Title",  "Body");
-        assertEquals(1, myDiary.numberOfDiary());
+        assertEquals(1, myDiary.numberOfEntries());
     }
     @Test
     public void testThatDiaryCreateAnEntryWithMoreEntry(){
         PersonalDiary myDiary = new PersonalDiary("username", "password");
         myDiary.unlockDiary("password");
         myDiary.createEntry("Title",  "Body");
-        assertEquals(1, myDiary.numberOfDiary());
+        assertEquals(1, myDiary.numberOfEntries());
         myDiary.unlockDiary("password");
         myDiary.createEntry("Title",  "Body2  ");
-        assertEquals(2, myDiary.numberOfDiary());
+        assertEquals(2, myDiary.numberOfEntries());
     }
     @Test
     public void testThatDiaryDeleteAnEntryWithRightPassword(){
@@ -49,10 +49,10 @@ public class PersonalDiaryTest {
         myDiary.createEntry("Title",  "Body2");
         myDiary.unlockDiary("WrongPassword");
         myDiary.deleteEntry(1);
-        assertEquals(2, myDiary.numberOfDiary());
+        assertEquals(2, myDiary.numberOfEntries());
         myDiary.unlockDiary("password");
         myDiary.deleteEntry(1);
-        assertEquals(1, myDiary.numberOfDiary());
+        assertEquals(1, myDiary.numberOfEntries());
     }
     @Test
     public void testThatDiaryDeleteMethodDontTakeInvalidIdentification(){
@@ -63,13 +63,13 @@ public class PersonalDiaryTest {
         myDiary.createEntry("Title",  "Body2");
         myDiary.unlockDiary("WrongPassword");
         myDiary.deleteEntry(1);
-        assertEquals(2, myDiary.numberOfDiary());
+        assertEquals(2, myDiary.numberOfEntries());
         myDiary.unlockDiary("password");
         myDiary.deleteEntry(1);
-        assertEquals(1, myDiary.numberOfDiary());
+        assertEquals(1, myDiary.numberOfEntries());
         myDiary.unlockDiary("password");
         myDiary.deleteEntry(1);
-        assertEquals(1, myDiary.numberOfDiary());
+        assertEquals(1, myDiary.numberOfEntries());
     }
     @Test
     public void testThatDiaryFindEntryWithId(){
@@ -81,7 +81,7 @@ public class PersonalDiaryTest {
         MyEntry expected = new MyEntry(1, "Title", "Body2");
         myDiary.unlockDiary("password");
         MyEntry result = myDiary.findEntryById(1);
-        assertEquals(expected.getId(), result.getId());
+        assertEquals(expected.getIdentification(), result.getIdentification());
         assertEquals(expected.getBody(), result.getBody());
     }
     @Test

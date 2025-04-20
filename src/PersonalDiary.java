@@ -1,12 +1,14 @@
-import javax.swing.*;
+
 import java.util.ArrayList;
 
 public class PersonalDiary {
+    private String username;
     private String password;
     private boolean isLocked = true;
     private ArrayList<MyEntry> entries;
 
     public PersonalDiary(String username, String password) {
+        this.username = username;
         this.password = password;
         entries = new ArrayList<>();
     }
@@ -26,24 +28,20 @@ public class PersonalDiary {
         if(isValidSecurity)this.entries.add(myEntry);
         this.lockDiary();
     }
-    public int numberOfDiary() {
+    public int numberOfEntries() {
         return entries.size();
     }
     public void deleteEntry(int identification) {
-        boolean isValidIdentification = identification >= 0 && identification < entries.size();
-        boolean isValidSecurity = !isLocked;
-        boolean isValidOperation = isValidIdentification && isValidSecurity;
+        boolean isValidOperation = !isLocked && identification >= 0 && identification < entries.size();
         if(isValidOperation)entries.remove(identification);
     }
     public MyEntry findEntryById(int identification) {
-        boolean isValidIdentification = identification >= 0 && identification < entries.size();
-        boolean isValidSecurity = !isLocked;
-        boolean isValidSearch = isValidIdentification && isValidSecurity;
+        boolean isValidSearch = !isLocked && identification >= 0 && identification < entries.size();
          return isValidSearch? entries.get(identification): null;
     }
-    public void updateEntry(int identification, String title1, String body) {
+    public void updateEntry(int identification, String title, String body) {
         boolean isValidOperation = !isLocked && identification >= 0 && identification < entries.size();
-        MyEntry updated = new  MyEntry(identification, title1, body);
+        MyEntry updated = new  MyEntry(identification, title, body);
        if(isValidOperation)this.entries.set(identification, updated);
        this.lockDiary();
     }

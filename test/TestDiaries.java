@@ -38,8 +38,31 @@ public class TestDiaries {
         Diaries diaries = new Diaries();
         diaries.add("username", "password");
         assertEquals(1, diaries.size());
-        PersonalDiary diaryExist =  diaries.findByUsername("username1");
-        assertNull(diaryExist);
+        assertNull(diaries.findByUsername("username1"));
+    }
+    @Test
+    public void testThatDiariesCanDeleteUser(){
+        Diaries diaries = new Diaries();
+        diaries.add("username", "password");
+        assertEquals(1, diaries.size());
+        diaries.delete("username", "password");
+        assertEquals(0, diaries.size());
+    }
+    @Test
+    public void testThatDiariesDontDeleteUserWithWrongUsername(){
+        Diaries diaries = new Diaries();
+        diaries.add("username", "password");
+        assertEquals(1, diaries.size());
+        diaries.delete("username1", "password");
+        assertEquals(1, diaries.size());
+    }
+    @Test
+    public void testThatDiariesDontDeleteUserWithWrongPassword(){
+        Diaries diaries = new Diaries();
+        diaries.add("username", "password");
+        assertEquals(1, diaries.size());
+        diaries.delete("username", "wrongPassword");
+        assertEquals(1, diaries.size());
     }
 
 
