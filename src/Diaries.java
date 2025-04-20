@@ -29,4 +29,9 @@ public class Diaries {
         if(isValidOperation)diariesUsername.remove(username);
         if(isValidOperation)diariesPassword.remove(username);
     }
+    public boolean isValidUsername(String username) {
+        boolean isValidUsername = !diariesUsername.contains(username);
+        if(isValidUsername)return true;
+        return false;
+    }
 }
