@@ -1,8 +1,7 @@
 public class Coffee extends Beverage {
     Beverage beverage;
     int price;
-    public Coffee(Beverage beverage) {
-        this.beverage = beverage;
+    public Coffee() {
         price = 10;
     }
 
